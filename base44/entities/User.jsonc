@@ -1,0 +1,15 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "alert_threshold": {
+      "type": "number"
+    },
+    "notifications_enabled": {
+      "type": "boolean"
+    },
+    "home_region": {
+      "type": "string"
+    }
+  }
+}
