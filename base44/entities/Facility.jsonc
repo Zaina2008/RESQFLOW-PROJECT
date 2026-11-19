@@ -1,0 +1,110 @@
+{
+  "name": "Facility",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "facility_type": {
+      "type": "string",
+      "enum": [
+        "Refinery",
+        "Steel plant",
+        "Thermal power",
+        "Chemical",
+        "Cement",
+        "Port terminal"
+      ],
+      "enumColors": [
+        "orange",
+        "gray",
+        "blue",
+        "purple",
+        "yellow",
+        "pink"
+      ]
+    },
+    "operator": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "monitored",
+        "paused"
+      ],
+      "enumColors": [
+        "green",
+        "gray"
+      ]
+    },
+    "heat_signatures": {
+      "type": "number"
+    },
+    "commissioned_year": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "name",
+    "facility_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
