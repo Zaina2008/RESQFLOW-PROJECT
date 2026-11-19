@@ -1,0 +1,89 @@
+{
+  "name": "Verification",
+  "type": "object",
+  "properties": {
+    "observation_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "confirmed",
+        "dismissed",
+        "needs review"
+      ],
+      "enumColors": [
+        "green",
+        "gray",
+        "yellow"
+      ]
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "site_name",
+    "decision",
+    "reviewed_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
