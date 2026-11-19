@@ -1,0 +1,140 @@
+{
+  "name": "Observation",
+  "type": "object",
+  "properties": {
+    "site_name": {
+      "type": "string",
+      "description": "Monitoring site the thermal detection belongs to"
+    },
+    "region": {
+      "type": "string",
+      "description": "State or region of the site"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "NASA FIRMS",
+        "Copernicus Sentinel-2",
+        "USGS Landsat",
+        "MODIS",
+        "VIIRS"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "gray",
+        "green",
+        "pink"
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "Industrial fire",
+        "Industrial heat",
+        "Forest fire",
+        "Agri burning"
+      ],
+      "enumColors": [
+        "red",
+        "orange",
+        "yellow",
+        "purple"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "description": "Detection confidence percentage"
+    },
+    "frp": {
+      "type": "number",
+      "description": "Fire radiative power in MW"
+    },
+    "brightness": {
+      "type": "number",
+      "description": "Brightness temperature in Kelvin"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "under review",
+        "verified",
+        "dismissed"
+      ],
+      "enumColors": [
+        "blue",
+        "yellow",
+        "green",
+        "gray"
+      ]
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "site_name",
+    "classification",
+    "detected_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
